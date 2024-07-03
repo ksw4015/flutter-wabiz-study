@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wabiz_client/router.dart';
 import 'package:wabiz_client/theme.dart';
 
 void main() {
@@ -10,12 +11,15 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      title: 'Wabiz',
       theme: wabizDefaultTheme,
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+      routerConfig: router,
+      darkTheme: ThemeData.dark(),
+      themeMode: ThemeMode.light,
+      themeAnimationStyle: AnimationStyle(
+        curve: Curves.easeInCirc,
+        duration: const Duration(milliseconds: 300)
       ),
     );
   }
