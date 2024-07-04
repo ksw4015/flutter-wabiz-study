@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () {
 
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.notifications_none
                           ),
                         )
@@ -76,14 +76,14 @@ class _HomePageState extends State<HomePage> {
                   Expanded(
                     child: GridView.builder(
                       scrollDirection: Axis.horizontal,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 12,
                         mainAxisSpacing: 0
                       ),
                       itemCount: 10,
                       itemBuilder: (context, index) {
-                        return InkWell(
+                        return const InkWell(
                           child: Column(
                             children: [
                               CircleAvatar(
@@ -106,11 +106,11 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(2)
                     ),
                   ),
-                  Gap(12)
+                  const Gap(12)
                 ],
               ),
             ),
-            Gap(12),
+            const Gap(12),
             Expanded(
               child: ListView.builder(
                 itemCount: 10,
@@ -135,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Container(
                             height: 220,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: Colors.grey,
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(10),
@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   '12,000명이 기다려요!',
                                   style: TextStyle(
                                     fontSize: 18,
@@ -156,28 +156,28 @@ class _HomePageState extends State<HomePage> {
                                     color: WabizColors.primary
                                   ),
                                 ),
-                                Gap(8),
-                                Text(
+                                const Gap(8),
+                                const Text(
                                   '아이돌 관리비법 | 준비안된 얼굴라인도 살리는 세럼',
                                   style: TextStyle(
                                     fontSize: 12,
                                   ),
                                 ),
-                                Gap(16),
+                                const Gap(16),
                                 Text(
                                   '세상에 없던 브랜드',
                                   style: TextStyle(
                                       color: WabizColors.wabizGray[500]
                                   ),
                                 ),
-                                Gap(16),
+                                const Gap(16),
                                 Container(
                                   decoration: BoxDecoration(
                                     color: WabizColors.background,
                                     borderRadius: BorderRadius.circular(3)
                                   ),
-                                  padding: EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-                                  child: Text(
+                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                                  child: const Text(
                                     '오픈예정',
                                     style: TextStyle(
                                       fontSize: 10
