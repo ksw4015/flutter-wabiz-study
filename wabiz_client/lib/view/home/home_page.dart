@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:wabiz_client/theme.dart';
 import 'package:wabiz_client/view_model/home/home_view_model.dart';
@@ -97,6 +98,10 @@ class _HomePageState extends State<HomePage> {
                               itemBuilder: (context, index) {
                                 final data = value[index];
                                 return InkWell(
+                                  onTap: () {
+                                    // push는 화면 스택을 쌓는다.
+                                    context.push('/home/category/${data.id}');
+                                  },
                                   child: Column(
                                     children: [
                                       CircleAvatar(
@@ -108,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                                           width: 42,
                                         ),
                                       ),
-                                      Gap(4),
+                                      const Gap(4),
                                       Text(data.title ?? '')
                                     ],
                                   ),

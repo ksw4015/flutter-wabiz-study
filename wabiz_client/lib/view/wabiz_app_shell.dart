@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+/**
+ * 하위 Screen을 담는 Shell Widget
+ */
 class WabizAppShell extends StatefulWidget {
 
   const WabizAppShell({

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wabiz_client/view/category/category_page.dart';
 import 'package:wabiz_client/view/home/home_page.dart';
 import 'package:wabiz_client/view/wabiz_app_shell.dart';
 
@@ -13,7 +14,10 @@ final router = GoRouter(
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
       builder: (context, state, child) {
-        return WabizAppShell(child: child, currentIndex: 0);
+        return WabizAppShell(
+          currentIndex: 0,
+          child: child,
+        );
       },
       routes: [
         GoRoute(
@@ -22,7 +26,17 @@ final router = GoRouter(
           builder: (context, state) {
             return const HomePage();
           },
-        )
+          routes: [
+            GoRoute(
+              path: 'category/:id',
+              builder: (context, state) {
+                final id = state.pathParameters['id'];
+                print(id);
+                return CategoryPage(categoryId: id ?? '0');
+              },
+            ),
+          ]
+        ),
       ],
     )
   ]
