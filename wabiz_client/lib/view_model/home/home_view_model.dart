@@ -37,6 +37,9 @@ class HomeViewModel extends _$HomeViewModel {
   }
 }
 
+/*
+  ViewModel의 UseCase(fetchHomeData)를 Provider로 제공
+ */
 @riverpod
 Future<HomeModel> fetchHomeProject(FetchHomeProjectRef ref) async {
   try {
@@ -50,7 +53,7 @@ Future<HomeModel> fetchHomeProject(FetchHomeProjectRef ref) async {
 @riverpod
 Future<List<Category>> fetchHomeCategories(FetchHomeCategoriesRef ref) async {
   await Future.delayed(const Duration(milliseconds: 2000));
-  List<Category> categories = [
+  List<Category> categories = const [
     Category(
       id: 1,
       iconPath: 'assets/icons/categories/1.png',

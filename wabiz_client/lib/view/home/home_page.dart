@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:wabiz_client/shared/model/category.dart';
-import 'package:wabiz_client/theme.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wabiz_client/view_model/home/home_view_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:wabiz_client/theme.dart';
+import 'package:wabiz_client/view_model/home/home_view_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -147,12 +146,12 @@ class _HomePageState extends State<HomePage> {
                       if(data.projects.isEmpty) {
                         return Column(
                           children: [
-                            Text('정보가 없습니다.'),
+                            const Text('정보가 없습니다.'),
                             TextButton(
                               onPressed: () {
-
-                                },
-                              child: Text('새로고침'),
+                                ref.invalidate(fetchHomeProjectProvider);
+                              },
+                              child: const Text('새로고침'),
                             )
                           ],
                         );
