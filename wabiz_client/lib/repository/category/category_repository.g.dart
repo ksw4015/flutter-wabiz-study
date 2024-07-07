@@ -1,25 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'home_api_service.dart';
+part of 'category_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$homeApiServiceHash() => r'05dd1ed22430dee7a24de45531a225d7ac33641f';
+String _$categoryRepositoryHash() =>
+    r'cb9c033957ccf85e69337eedc4265d0fe6ca87ca';
 
-/// See also [homeApiService].
-@ProviderFor(homeApiService)
-final homeApiServiceProvider = AutoDisposeProvider<HomeApi>.internal(
-  homeApiService,
-  name: r'homeApiServiceProvider',
+/// See also [categoryRepository].
+@ProviderFor(categoryRepository)
+final categoryRepositoryProvider =
+    AutoDisposeProvider<CategoryRepository>.internal(
+  categoryRepository,
+  name: r'categoryRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$homeApiServiceHash,
+      : _$categoryRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef HomeApiServiceRef = AutoDisposeProviderRef<HomeApi>;
+typedef CategoryRepositoryRef = AutoDisposeProviderRef<CategoryRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
