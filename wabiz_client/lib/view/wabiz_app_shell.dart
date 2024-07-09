@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 /**
@@ -20,15 +21,22 @@ class WabizAppShell extends StatefulWidget {
 }
 
 class _WabizAppShellState extends State<WabizAppShell> {
+
+  void _onItemTapped(int index, BuildContext context) {
+    if(index == 3) {
+      GoRouter.of(context).go('/my');
+    } else {
+      GoRouter.of(context).go('/home');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: widget.child,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: widget.currentIndex,
-        onTap: (index) {
-          GoRouter.of(context).go('/home');
-        },
+        onTap: (index) => _onItemTapped(index, context),
         items: [
           const BottomNavigationBarItem(
             icon: Icon(Icons.home_filled),

@@ -6,6 +6,12 @@ import '../../model/home/home_model.dart';
 
 part 'home_repository.g.dart';
 
+@riverpod
+HomeRepository homeRepository(HomeRepositoryRef ref) {
+  final service = ref.watch(homeApiServiceProvider);
+  return HomeRepositoryImpl(service);
+}
+
 abstract class HomeRepository {
   Future<HomeModel> getHomeProjects();
 }
@@ -20,10 +26,4 @@ class HomeRepositoryImpl implements HomeRepository {
     final result = await homeApiService.getHomeProjects();
     return result;
   }
-}
-
-@riverpod
-HomeRepository homeRepository(HomeRepositoryRef ref) {
-  final service = ref.watch(homeApiServiceProvider);
-  return HomeRepositoryImpl(service);
 }

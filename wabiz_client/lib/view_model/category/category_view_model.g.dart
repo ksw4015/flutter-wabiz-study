@@ -176,7 +176,7 @@ class _FetchCategoryProjectsProviderElement
 }
 
 String _$fetchCategoryProjectsByTypeHash() =>
-    r'f4fefa0c43adc528e75fe90fe4da9995e517c84b';
+    r'2bcdd4605042736f78b83fdbc07e139813c97758';
 
 /// See also [fetchCategoryProjectsByType].
 @ProviderFor(fetchCategoryProjectsByType)
@@ -311,7 +311,7 @@ class _FetchCategoryProjectsByTypeProviderElement
       (origin as FetchCategoryProjectsByTypeProvider).categoryId;
 }
 
-String _$categoryViewModelHash() => r'd93d9a098f7a9bb317a2e7be8c8bd5b8d67a5c4f';
+String _$categoryViewModelHash() => r'bb22bae5f6908e88de63b1652b8745cfce4359e6';
 
 /// See also [CategoryViewModel].
 @ProviderFor(CategoryViewModel)
