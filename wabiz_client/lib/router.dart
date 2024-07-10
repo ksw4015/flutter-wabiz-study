@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wabiz_client/view/category/category_page.dart';
 import 'package:wabiz_client/view/home/home_page.dart';
+import 'package:wabiz_client/view/login/sign_in_page.dart';
+import 'package:wabiz_client/view/login/sign_up_page.dart';
 import 'package:wabiz_client/view/my/my_page.dart';
 import 'package:wabiz_client/view/wabiz_app_shell.dart';
 
@@ -12,6 +14,21 @@ final router = GoRouter(
   navigatorKey: _rootNavigatorKey,
   initialLocation: '/home',
   routes: [
+    // ShellRouter에 속하지 않음.
+    GoRoute(
+      path: '/login',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) {
+        return SignInPage();
+      },
+    ),
+    GoRoute(
+      path: '/sign-up',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) {
+        return SignUpPage();
+      },
+    ),
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
       builder: (context, state, child) {

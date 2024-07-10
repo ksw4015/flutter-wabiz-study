@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 
 part 'network_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 Dio dio(DioRef ref) {
   var localhost = 'localhost';
   // Android Emulator Localhost Address

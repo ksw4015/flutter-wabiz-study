@@ -1,24 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'network_provider.dart';
+part of 'login_api_service.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dioHash() => r'14e538661a4d60f11c4b7b12264c854e37a9b670';
+String _$loginApiHash() => r'89dc5642d483b1dc9fc8fac5e67c0e080f245b6d';
 
-/// See also [dio].
-@ProviderFor(dio)
-final dioProvider = Provider<Dio>.internal(
-  dio,
-  name: r'dioProvider',
+/// See also [loginApi].
+@ProviderFor(loginApi)
+final loginApiProvider = Provider<LoginApi>.internal(
+  loginApi,
+  name: r'loginApiProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$dioHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$loginApiHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef DioRef = ProviderRef<Dio>;
+typedef LoginApiRef = ProviderRef<LoginApi>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

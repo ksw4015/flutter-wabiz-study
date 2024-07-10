@@ -1,6 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wabiz_client/model/login/login_model.dart';
 import 'package:wabiz_client/repository/my/my_repository.dart';
+import 'package:wabiz_client/view_model/login/login_view_model.dart';
 
 part 'my_view_model.g.dart';
 part 'my_view_model.freezed.dart';
@@ -12,7 +14,8 @@ part 'my_view_model.freezed.dart';
 @freezed
 class MyPageState with _$MyPageState {
   factory MyPageState({
-    bool? loginState
+    bool? loginState,
+    LoginModel? loginModel
   }) = _MyPageState;
 }
 
@@ -23,8 +26,14 @@ class MyPageState with _$MyPageState {
 class MyViewModel extends _$MyViewModel {
   @override
   MyPageState build() {
+    final state = ref.watch(loginViewModelProvider);
     return MyPageState(
-      loginState: false
+      loginState: state.isLogin,
+      loginModel: LoginModel(
+        email: state.email,
+        username: state.userName,
+        id: state.userId
+      )
     );
   }
 

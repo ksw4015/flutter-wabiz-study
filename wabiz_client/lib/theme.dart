@@ -49,6 +49,27 @@ final ThemeData wabizDefaultTheme = ThemeData(
         width: 1.0
       ),
     ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: const BorderSide(
+        color: WabizColors.primary,
+        width: 1.0
+      )
+    ),
+    errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(
+            color: Colors.red,
+            width: 1.0
+        )
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(
+            color: WabizColors.primary,
+            width: 1.0
+        )
+    ),
     hintStyle: TextStyle(
       fontSize: 16,
       color: WabizColors.wabizGray[400],

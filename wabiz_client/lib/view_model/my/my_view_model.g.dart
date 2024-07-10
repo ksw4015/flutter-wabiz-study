@@ -6,7 +6,7 @@ part of 'my_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$myViewModelHash() => r'ff15cedb714dc347784d43fac71c27c821b26c5a';
+String _$myViewModelHash() => r'bcf15843e4e26bd6634ae5cd0691269d8a0c70a4';
 /**
  * MyPageState를 관리하고 업데이트하는 ViewModel class
  */
