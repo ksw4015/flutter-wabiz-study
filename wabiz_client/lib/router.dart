@@ -5,6 +5,8 @@ import 'package:wabiz_client/view/home/home_page.dart';
 import 'package:wabiz_client/view/login/sign_in_page.dart';
 import 'package:wabiz_client/view/login/sign_up_page.dart';
 import 'package:wabiz_client/view/my/my_page.dart';
+import 'package:wabiz_client/view/project/add_project_page.dart';
+import 'package:wabiz_client/view/project/add_reward_page.dart';
 import 'package:wabiz_client/view/wabiz_app_shell.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -65,6 +67,22 @@ final router = GoRouter(
           },
         )
       ],
+    ),
+    GoRoute(
+      path: '/add',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) {
+        return AddProjectPage();
+      },
+      routes: [
+        GoRoute(
+          path: 'reward/:id',
+          builder: (context, state) {
+            final projectId = state.extra as String;
+            return AddRewardPage(projectId: projectId);
+          },
+        )
+      ]
     )
   ]
 );
