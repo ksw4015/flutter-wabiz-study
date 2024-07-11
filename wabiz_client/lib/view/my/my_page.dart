@@ -177,17 +177,18 @@ class _MyPageState extends State<MyPage> {
                       ),
                       InkWell(
                         onTap: () {
-                          if(myState.loginState != true) {
-                            showDialog(
-                              context: context,
-                              builder: (context) => const AlertDialog(
-                                content: Text(
-                                  '로그인이 필요한 서비스입니다.'
-                                ),
-                              ),
-                            );
-                            return;
-                          }
+                          context.push('/add/reward/0');
+                          // if(myState.loginState != true) {
+                          //   showDialog(
+                          //     context: context,
+                          //     builder: (context) => const AlertDialog(
+                          //       content: Text(
+                          //         '로그인이 필요한 서비스입니다.'
+                          //       ),
+                          //     ),
+                          //   );
+                          //   return;
+                          // }
                         },
                         child: Container(
                           height: 50,
