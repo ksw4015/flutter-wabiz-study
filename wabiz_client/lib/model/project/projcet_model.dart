@@ -28,12 +28,15 @@ class ProjectItemModel with _$ProjectItemModel {
     String? thumbnail,
     String? deadline,
     String? description,
+    String? projectClass,
     int? waitlistCount,
     int? totalFundedCount,
     int? totalFunded,
     String? isOpen,
     String? category,
-    String? type
+    String? type,
+    @Default([]) List<int> image,
+    @Default([]) List<int> projectImage
   }) = _ProjectItemModel;
 
   factory ProjectItemModel.fromJson(Map<String, dynamic> json)

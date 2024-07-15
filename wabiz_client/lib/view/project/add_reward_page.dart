@@ -1,10 +1,13 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wabiz_client/model/project/reward_model.dart';
 import 'package:wabiz_client/theme.dart';
 import 'package:wabiz_client/view/project/add_project_page.dart';
+import 'package:wabiz_client/view_model/project/project_view_model.dart';
 
 class AddRewardPage extends StatefulWidget {
   final String projectId;
@@ -129,22 +132,52 @@ class _AddRewardPageState extends State<AddRewardPage> {
                     ),
                     Gap(12),
                     Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          context.go('/my');
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: WabizColors.primary
-                          ),
-                          child: Center(
-                            child: Text(
-                              '추가',
-                              style: addProjectTitleStyle.copyWith(color: Colors.white),
+                      child: Consumer(
+                        builder: (context, ref, child) {
+                          return GestureDetector(
+                            onTap: () async {
+                              final result = await ref.read(projectViewModelProvider.notifier).createProjectReward(widget.projectId, RewardItemModel(
+                                title: titleEditingController.text.trim(),
+                                price: int.tryParse(priceEditingController.text.trim()),
+                                description: descriptionController.text.trim(),
+                                imageRaw: [],
+                                imageUrl: ''
+                              ));
+                              if(result) {
+                                if(context.mounted) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        content: Text('리워드 등록 성공'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              context.go('/my');
+                                            },
+                                            child: Text('확인'),
+                                          )
+                                        ],
+                                      );
+                                    },
+                                  );
+                                }
+                              }
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: WabizColors.primary
+                              ),
+                              child: Center(
+                                child: Text(
+                                  '추가',
+                                  style: addProjectTitleStyle.copyWith(color: Colors.white),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
+                          );
+                        }
                       ),
                     )
                   ],

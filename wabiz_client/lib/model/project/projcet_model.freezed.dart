@@ -176,12 +176,15 @@ mixin _$ProjectItemModel {
   String? get thumbnail => throw _privateConstructorUsedError;
   String? get deadline => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
+  String? get projectClass => throw _privateConstructorUsedError;
   int? get waitlistCount => throw _privateConstructorUsedError;
   int? get totalFundedCount => throw _privateConstructorUsedError;
   int? get totalFunded => throw _privateConstructorUsedError;
   String? get isOpen => throw _privateConstructorUsedError;
   String? get category => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
+  List<int> get image => throw _privateConstructorUsedError;
+  List<int> get projectImage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -206,12 +209,15 @@ abstract class $ProjectItemModelCopyWith<$Res> {
       String? thumbnail,
       String? deadline,
       String? description,
+      String? projectClass,
       int? waitlistCount,
       int? totalFundedCount,
       int? totalFunded,
       String? isOpen,
       String? category,
-      String? type});
+      String? type,
+      List<int> image,
+      List<int> projectImage});
 }
 
 /// @nodoc
@@ -237,12 +243,15 @@ class _$ProjectItemModelCopyWithImpl<$Res, $Val extends ProjectItemModel>
     Object? thumbnail = freezed,
     Object? deadline = freezed,
     Object? description = freezed,
+    Object? projectClass = freezed,
     Object? waitlistCount = freezed,
     Object? totalFundedCount = freezed,
     Object? totalFunded = freezed,
     Object? isOpen = freezed,
     Object? category = freezed,
     Object? type = freezed,
+    Object? image = null,
+    Object? projectImage = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -285,6 +294,10 @@ class _$ProjectItemModelCopyWithImpl<$Res, $Val extends ProjectItemModel>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      projectClass: freezed == projectClass
+          ? _value.projectClass
+          : projectClass // ignore: cast_nullable_to_non_nullable
+              as String?,
       waitlistCount: freezed == waitlistCount
           ? _value.waitlistCount
           : waitlistCount // ignore: cast_nullable_to_non_nullable
@@ -309,6 +322,14 @@ class _$ProjectItemModelCopyWithImpl<$Res, $Val extends ProjectItemModel>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      projectImage: null == projectImage
+          ? _value.projectImage
+          : projectImage // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ) as $Val);
   }
 }
@@ -332,12 +353,15 @@ abstract class _$$ProjectItemModelImplCopyWith<$Res>
       String? thumbnail,
       String? deadline,
       String? description,
+      String? projectClass,
       int? waitlistCount,
       int? totalFundedCount,
       int? totalFunded,
       String? isOpen,
       String? category,
-      String? type});
+      String? type,
+      List<int> image,
+      List<int> projectImage});
 }
 
 /// @nodoc
@@ -361,12 +385,15 @@ class __$$ProjectItemModelImplCopyWithImpl<$Res>
     Object? thumbnail = freezed,
     Object? deadline = freezed,
     Object? description = freezed,
+    Object? projectClass = freezed,
     Object? waitlistCount = freezed,
     Object? totalFundedCount = freezed,
     Object? totalFunded = freezed,
     Object? isOpen = freezed,
     Object? category = freezed,
     Object? type = freezed,
+    Object? image = null,
+    Object? projectImage = null,
   }) {
     return _then(_$ProjectItemModelImpl(
       id: freezed == id
@@ -409,6 +436,10 @@ class __$$ProjectItemModelImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      projectClass: freezed == projectClass
+          ? _value.projectClass
+          : projectClass // ignore: cast_nullable_to_non_nullable
+              as String?,
       waitlistCount: freezed == waitlistCount
           ? _value.waitlistCount
           : waitlistCount // ignore: cast_nullable_to_non_nullable
@@ -433,6 +464,14 @@ class __$$ProjectItemModelImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
+      image: null == image
+          ? _value._image
+          : image // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      projectImage: null == projectImage
+          ? _value._projectImage
+          : projectImage // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ));
   }
 }
@@ -452,12 +491,17 @@ class _$ProjectItemModelImpl implements _ProjectItemModel {
       this.thumbnail,
       this.deadline,
       this.description,
+      this.projectClass,
       this.waitlistCount,
       this.totalFundedCount,
       this.totalFunded,
       this.isOpen,
       this.category,
-      this.type});
+      this.type,
+      final List<int> image = const [],
+      final List<int> projectImage = const []})
+      : _image = image,
+        _projectImage = projectImage;
 
   factory _$ProjectItemModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProjectItemModelImplFromJson(json);
@@ -483,6 +527,8 @@ class _$ProjectItemModelImpl implements _ProjectItemModel {
   @override
   final String? description;
   @override
+  final String? projectClass;
+  @override
   final int? waitlistCount;
   @override
   final int? totalFundedCount;
@@ -494,10 +540,27 @@ class _$ProjectItemModelImpl implements _ProjectItemModel {
   final String? category;
   @override
   final String? type;
+  final List<int> _image;
+  @override
+  @JsonKey()
+  List<int> get image {
+    if (_image is EqualUnmodifiableListView) return _image;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_image);
+  }
+
+  final List<int> _projectImage;
+  @override
+  @JsonKey()
+  List<int> get projectImage {
+    if (_projectImage is EqualUnmodifiableListView) return _projectImage;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_projectImage);
+  }
 
   @override
   String toString() {
-    return 'ProjectItemModel(id: $id, categoryId: $categoryId, projectTypeId: $projectTypeId, userId: $userId, title: $title, owner: $owner, price: $price, thumbnail: $thumbnail, deadline: $deadline, description: $description, waitlistCount: $waitlistCount, totalFundedCount: $totalFundedCount, totalFunded: $totalFunded, isOpen: $isOpen, category: $category, type: $type)';
+    return 'ProjectItemModel(id: $id, categoryId: $categoryId, projectTypeId: $projectTypeId, userId: $userId, title: $title, owner: $owner, price: $price, thumbnail: $thumbnail, deadline: $deadline, description: $description, projectClass: $projectClass, waitlistCount: $waitlistCount, totalFundedCount: $totalFundedCount, totalFunded: $totalFunded, isOpen: $isOpen, category: $category, type: $type, image: $image, projectImage: $projectImage)';
   }
 
   @override
@@ -520,6 +583,8 @@ class _$ProjectItemModelImpl implements _ProjectItemModel {
                 other.deadline == deadline) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            (identical(other.projectClass, projectClass) ||
+                other.projectClass == projectClass) &&
             (identical(other.waitlistCount, waitlistCount) ||
                 other.waitlistCount == waitlistCount) &&
             (identical(other.totalFundedCount, totalFundedCount) ||
@@ -529,29 +594,36 @@ class _$ProjectItemModelImpl implements _ProjectItemModel {
             (identical(other.isOpen, isOpen) || other.isOpen == isOpen) &&
             (identical(other.category, category) ||
                 other.category == category) &&
-            (identical(other.type, type) || other.type == type));
+            (identical(other.type, type) || other.type == type) &&
+            const DeepCollectionEquality().equals(other._image, _image) &&
+            const DeepCollectionEquality()
+                .equals(other._projectImage, _projectImage));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      categoryId,
-      projectTypeId,
-      userId,
-      title,
-      owner,
-      price,
-      thumbnail,
-      deadline,
-      description,
-      waitlistCount,
-      totalFundedCount,
-      totalFunded,
-      isOpen,
-      category,
-      type);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        categoryId,
+        projectTypeId,
+        userId,
+        title,
+        owner,
+        price,
+        thumbnail,
+        deadline,
+        description,
+        projectClass,
+        waitlistCount,
+        totalFundedCount,
+        totalFunded,
+        isOpen,
+        category,
+        type,
+        const DeepCollectionEquality().hash(_image),
+        const DeepCollectionEquality().hash(_projectImage)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -580,12 +652,15 @@ abstract class _ProjectItemModel implements ProjectItemModel {
       final String? thumbnail,
       final String? deadline,
       final String? description,
+      final String? projectClass,
       final int? waitlistCount,
       final int? totalFundedCount,
       final int? totalFunded,
       final String? isOpen,
       final String? category,
-      final String? type}) = _$ProjectItemModelImpl;
+      final String? type,
+      final List<int> image,
+      final List<int> projectImage}) = _$ProjectItemModelImpl;
 
   factory _ProjectItemModel.fromJson(Map<String, dynamic> json) =
       _$ProjectItemModelImpl.fromJson;
@@ -611,6 +686,8 @@ abstract class _ProjectItemModel implements ProjectItemModel {
   @override
   String? get description;
   @override
+  String? get projectClass;
+  @override
   int? get waitlistCount;
   @override
   int? get totalFundedCount;
@@ -622,6 +699,10 @@ abstract class _ProjectItemModel implements ProjectItemModel {
   String? get category;
   @override
   String? get type;
+  @override
+  List<int> get image;
+  @override
+  List<int> get projectImage;
   @override
   @JsonKey(ignore: true)
   _$$ProjectItemModelImplCopyWith<_$ProjectItemModelImpl> get copyWith =>

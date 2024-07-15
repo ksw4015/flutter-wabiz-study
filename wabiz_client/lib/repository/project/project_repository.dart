@@ -9,7 +9,7 @@ import 'package:wabiz_client/shared/model/response_model.dart';
 part 'project_repository.g.dart';
 
 @riverpod
-ProjectRepository projectRepository(ref) {
+ProjectRepository projectRepository(ProjectRepositoryRef ref) {
   final service = ref.watch(projectApiServiceProvider);
   return ProjectRepository(service);
 }
