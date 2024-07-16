@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:wabiz_client/theme.dart';
 import 'package:wabiz_client/view_model/category/category_view_model.dart';
@@ -273,6 +275,12 @@ class _CategoryPageState extends ConsumerState<CategoryPage> {
                                 final project = data[index];
                                 return InkWell(
                                   onTap: () {
+                                    context.push(
+                                      '/detail',
+                                      extra: json.encode(
+                                        project.toJson()
+                                      )
+                                    );
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(bottom: 24),

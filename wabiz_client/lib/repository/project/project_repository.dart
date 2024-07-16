@@ -43,4 +43,10 @@ class ProjectRepository {
     final result = await projectService.createProjectReward(id, body);
     return result;
   }
+
+  Future<ProjectModel> getProjectByProjectId(String id) async {
+    final result = await projectService.getProjectByProjectId(id);
+    return result;
+  }
 }
+

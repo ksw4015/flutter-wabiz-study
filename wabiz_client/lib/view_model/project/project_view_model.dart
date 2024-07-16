@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wabiz_client/model/project/projcet_model.dart';
 import 'package:wabiz_client/model/project/reward_model.dart';
 import 'package:wabiz_client/repository/project/project_repository.dart';
@@ -54,6 +53,15 @@ Future<List<ProjectType>> fetchProjectTypes(FetchProjectTypesRef ref) async {
         imagePath: 'assets/icons/type/8.svg'
     ),
   ];
+}
+
+@riverpod
+class ProjectDetailViewModel extends _$ProjectDetailViewModel {
+  @override
+  Future<ProjectItemModel> build(String id) async {
+    final result = await ref.watch(projectRepositoryProvider).getProjectByProjectId(id);
+    return result.data.first;
+  }
 }
 
 @riverpod
