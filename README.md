@@ -8,3 +8,6 @@
 
 #### 3) MVVM
 - ViewModel을 제공하는 형태
+
+#### 4) Router
+- BottomNavigation 사용시 ShellRouter
