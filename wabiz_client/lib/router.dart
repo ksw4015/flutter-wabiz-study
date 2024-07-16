@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wabiz_client/view/category/category_page.dart';
@@ -7,6 +9,7 @@ import 'package:wabiz_client/view/login/sign_up_page.dart';
 import 'package:wabiz_client/view/my/my_page.dart';
 import 'package:wabiz_client/view/project/add_project_page.dart';
 import 'package:wabiz_client/view/project/add_reward_page.dart';
+import 'package:wabiz_client/view/project/project_detail_page.dart';
 import 'package:wabiz_client/view/wabiz_app_shell.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -31,6 +34,7 @@ final router = GoRouter(
         return SignUpPage();
       },
     ),
+    // Bottom Navigation
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
       builder: (context, state, child) {
@@ -83,6 +87,14 @@ final router = GoRouter(
           },
         )
       ]
+    ),
+    GoRoute(
+      path: '/detail',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) {
+        final project = state.extra as String;
+        return ProjectDetailPage(project: project);
+      },
     )
   ]
 );
