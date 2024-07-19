@@ -11,3 +11,8 @@
 
 #### 4) Router
 - BottomNavigation 사용시 ShellRouter
+
+#### 5) Macros
+- 올해 발표된 Dart의 실험적 기능
+- freezed나 json_serializable 등의 패키지없이 코드생성이 가능할 듯
+- master channel의 실험적 기능으로 사용가능
