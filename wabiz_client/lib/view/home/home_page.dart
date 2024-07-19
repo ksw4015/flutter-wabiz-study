@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -175,127 +177,29 @@ class _HomePageState extends State<HomePage> {
                         ),
                       );
                     },
-                    error: (error, stackTrace) => Text('$error, $stackTrace}'),
+                    error: (error, stackTrace) {
+                      switch(error) {
+                        case ConnectionTimeoutError():
+                        case ConnectionError():
+                          return Center(
+                            child: Text('${error.toString()}\n${stackTrace.toString()}'),
+                          );
+                        case UnsupportedError():
+                          return Center(
+                            child: Text('${error.toString()}'),
+                          );
+                      }
+                      return globalErrorHandler(
+                        error as ErrorHandler,
+                        error as DioException,
+                        ref,
+                        fetchHomeProjectProvider,
+                      );
+                    },
                     loading: () => const Center(
                       child: CircularProgressIndicator(),
                     ),
                   );
-                  // final project = ref.watch(homeViewModelProvider.notifier).fetchHomeData();
-                  // return FutureBuilder(
-                  //   future: project,
-                  //   builder: (context, snapshot) {
-                  //     if(snapshot.hasData) {
-                  //       final data = snapshot.data;
-                  //       if(data?.projects.isEmpty ?? true) {
-                  //         return Column(
-                  //           children: [
-                  //             Text('정보가 없습니다.'),
-                  //             TextButton(
-                  //               onPressed: () {
-                  //
-                  //               },
-                  //               child: Text('새로고침'),
-                  //             )
-                  //           ],
-                  //         );
-                  //       }
-                  //       return Container(
-                  //         color: Colors.white,
-                  //         child: ListView.builder(
-                  //           itemCount: data?.projects.length,
-                  //           itemBuilder: (context, index) {
-                  //             final project = data?.projects[index];
-                  //             return InkWell(
-                  //               child: Container(
-                  //                 margin: const EdgeInsets.only(bottom: 8, left: 16, right: 16, top: 20),
-                  //                 decoration: BoxDecoration(
-                  //                     color: Colors.white,
-                  //                     borderRadius: BorderRadius.circular(10),
-                  //                     boxShadow: [
-                  //                       BoxShadow(
-                  //                           offset: const Offset(0, 8),
-                  //                           color: Colors.black.withOpacity(0.1),
-                  //                           blurRadius: 30,
-                  //                           spreadRadius: 4
-                  //                       )
-                  //                     ]
-                  //                 ),
-                  //                 child: Column(
-                  //                   crossAxisAlignment: CrossAxisAlignment.start,
-                  //                   children: [
-                  //                     Container(
-                  //                       height: 220,
-                  //                       decoration: BoxDecoration(
-                  //                           color: Colors.grey,
-                  //                           borderRadius: const BorderRadius.only(
-                  //                               topLeft: Radius.circular(10),
-                  //                               topRight: Radius.circular(10)
-                  //                           ),
-                  //                         image: DecorationImage(
-                  //                           image: CachedNetworkImageProvider(project?.thumbnail ?? ''),
-                  //                           fit: BoxFit.cover
-                  //                         )
-                  //                       ),
-                  //                     ),
-                  //                     Padding(
-                  //                       padding: const EdgeInsets.all(16.0),
-                  //                       child: Column(
-                  //                         crossAxisAlignment: CrossAxisAlignment.start,
-                  //                         children: [
-                  //                           Text(
-                  //                             project?.isOpen == 'close' ?
-                  //                             '${numberFormatter.format(project?.waitlistCount)}명이 기다려요'
-                  //                             : '${numberFormatter.format(project?.totalFundedCount)}명이 인증했어요',
-                  //                             style: const TextStyle(
-                  //                                 fontSize: 18,
-                  //                                 fontWeight: FontWeight.w700,
-                  //                                 color: WabizColors.primary
-                  //                             ),
-                  //                           ),
-                  //                           const Gap(8),
-                  //                           Text(
-                  //                             project?.title ?? '아이돌 관리비법 | 준비안된 얼굴라인도 살리는 세럼',
-                  //                             style: const TextStyle(
-                  //                               fontSize: 12,
-                  //                             ),
-                  //                           ),
-                  //                           const Gap(16),
-                  //                           Text(
-                  //                             project?.owner ?? '세상에 없던 브랜드',
-                  //                             style: TextStyle(
-                  //                                 color: WabizColors.wabizGray[500]
-                  //                             ),
-                  //                           ),
-                  //                           const Gap(16),
-                  //                           Container(
-                  //                             decoration: BoxDecoration(
-                  //                                 color: WabizColors.background,
-                  //                                 borderRadius: BorderRadius.circular(3)
-                  //                             ),
-                  //                             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-                  //                             child: Text(
-                  //                               project?.isOpen == 'close' ? '오픈예정' : '바로구매',
-                  //                               style: const TextStyle(
-                  //                                   fontSize: 10
-                  //                               ),
-                  //                             ),
-                  //                           )
-                  //                         ],
-                  //                       ),
-                  //                     )
-                  //                   ],
-                  //                 ),
-                  //               ),
-                  //             );
-                  //           },
-                  //         ),
-                  //       );
-                  //     }
-                  //     return Center(
-                  //       child: CircularProgressIndicator(),
-                  //     );
-                  //   },
-                  // );
                 },
               ),
             )
@@ -304,4 +208,53 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+}
+
+sealed class ErrorHandler {}
+
+class ConnectionTimeoutError extends ErrorHandler {
+  DioException exception;
+  ConnectionTimeoutError(this.exception);
+}
+
+class ConnectionError extends ErrorHandler {
+  DioException exception;
+  ConnectionError(this.exception);
+}
+
+Widget globalErrorHandler(
+    ErrorHandler? errorHandler,
+    DioException? exception,
+    WidgetRef? ref,
+    ProviderOrFamily? provider
+) {
+  return Padding(
+    padding: const EdgeInsets.all(16),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text("${exception?.message}"),
+        if(ref != null)
+          TextButton(
+            onPressed: () {
+              if(provider != null) {
+                ref.invalidate(provider);
+              }
+            },
+            child: const Text('새로고침'),
+          ),
+        TextButton(
+          onPressed: () {
+            Clipboard.setData(
+              ClipboardData(text: exception?.stackTrace.toString() ?? '')
+            );
+          },
+          child: const Text(
+            '에러 전송'
+          ),
+        )
+      ],
+    ),
+  );
 }
