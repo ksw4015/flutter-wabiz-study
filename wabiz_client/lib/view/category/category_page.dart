@@ -126,7 +126,6 @@ class _CategoryPageState extends ConsumerState<CategoryPage> {
               }
             ),
           ),
-          // TODO : TAP
           Container(
             height: 110,
             decoration: const BoxDecoration(
@@ -162,6 +161,7 @@ class _CategoryPageState extends ConsumerState<CategoryPage> {
                                 ),
                                 child: IntrinsicWidth(
                                   child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       SvgPicture.asset(
                                         tab.imagePath ?? '',
