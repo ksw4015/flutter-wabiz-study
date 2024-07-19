@@ -35,7 +35,7 @@ class CategoryItemModel with _$CategoryItemModel {
     int? totalFunded,
     String? isOpen,
     String? category,
-    String? projectType,
+    String? type,
     @Default([]) List<int> image
   }) = _CategoryItemModel;
 
