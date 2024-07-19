@@ -6,9 +6,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wabiz_client/model/category/category_model.dart';
 import 'package:wabiz_client/model/project/projcet_model.dart';
 import 'package:wabiz_client/theme.dart';
 import 'package:wabiz_client/view/project/detail/project_detail_widget.dart';
+import 'package:wabiz_client/view_model/favorite/favorite_view_model.dart';
 import 'package:wabiz_client/view_model/project/project_view_model.dart';
 
 class ProjectDetailPage extends StatefulWidget {
@@ -170,16 +172,25 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
           );
         }
       ),
-      bottomNavigationBar: const _BottomAppbar(),
+      bottomNavigationBar: _BottomAppbar(projectItemModel: projectItemModel,),
     );
   }
 }
 
-class _BottomAppbar extends StatelessWidget {
-  const _BottomAppbar({super.key});
+class _BottomAppbar extends ConsumerWidget {
+  final ProjectItemModel projectItemModel;
+
+  const _BottomAppbar({
+    super.key,
+    required this.projectItemModel
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final favorites = ref.watch(favoriteViewModelProvider);
+    final current = favorites.projects
+        .where((element) => element.id == projectItemModel.id,)
+        .toList();
     return BottomAppBar(
       height: 84,
       color: Colors.white,
@@ -200,10 +211,47 @@ class _BottomAppbar extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () {
-
+                    if(current.isNotEmpty) {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text('안내'),
+                            content: Text('구독을 취소할까요?'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {  
+                                  ref.read(favoriteViewModelProvider.notifier)
+                                    .removeItem(CategoryItemModel(id: projectItemModel.id));
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('네'),
+                              )
+                            ],
+                          );
+                        },
+                      );
+                    } else {
+                      ref.read(favoriteViewModelProvider.notifier).addItem(
+                        CategoryItemModel(
+                          id: projectItemModel.id,
+                          thumbnail: projectItemModel.thumbnail,
+                          description: projectItemModel.description,
+                          title: projectItemModel.title,
+                          owner: projectItemModel.owner,
+                          totalFunded: projectItemModel.totalFunded,
+                          totalFundedCount: projectItemModel.totalFundedCount
+                        )
+                      );
+                    }
                   },
-                  icon: const Icon(
-                      Icons.favorite_border
+                  icon: Icon(
+                    current.isNotEmpty
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                    color: current.isNotEmpty
+                        ? Colors.red
+                        : Colors.black,
                   ),
                 ),
                 const Text('1만+')

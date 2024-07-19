@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wabiz_client/view/category/category_page.dart';
+import 'package:wabiz_client/view/favorite/favorite_page.dart';
 import 'package:wabiz_client/view/home/home_page.dart';
 import 'package:wabiz_client/view/login/sign_in_page.dart';
 import 'package:wabiz_client/view/login/sign_up_page.dart';
@@ -41,6 +42,7 @@ final router = GoRouter(
         return WabizAppShell(
           currentIndex: switch(state.uri.path) {
             var path when path.startsWith('/my') => 3,
+            var path when path.startsWith('/favorite') => 2,
             _ => 0
           },
           child: child,
@@ -62,6 +64,13 @@ final router = GoRouter(
               },
             ),
           ]
+        ),
+        GoRoute(
+          path: '/favorite',
+          parentNavigatorKey: _shellNavigatorKey,
+          builder: (context, state) {
+            return FavoritePage();
+          },
         ),
         GoRoute(
           path: '/my',
